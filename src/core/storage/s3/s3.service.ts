@@ -9,20 +9,20 @@ export class S3Servie extends S3Client {
   constructor(private readonly configService: ConfigService) {
     super();
     this.initConfig = {
-      region: this.configService.get<string>('AWS_REGION') as string,
+      region: this.configService.get<string>('AWS_S3_REGION') as string,
       credentials: {
         accessKeyId: this.configService.get<string>(
-          'AWS_ACCESS_KEY_ID',
+          'AWS_S3_ACCESS_KEY_ID',
         ) as string,
         secretAccessKey: this.configService.get<string>(
-          'AWS_SECRET_ACCESS_KEY',
+          'AWS_S3_SECRET_ACCESS_KEY',
         ) as string,
       },
     };
     this.bucketName = this.configService.get<string>(
-      'AWS_BUCKET_NAME',
+      'AWS_S3_BUCKET_NAME',
     ) as string;
-    this.s3_region = this.configService.get<string>('AWS_REGION') as string;
+    this.s3_region = this.configService.get<string>('AWS_S3_REGION') as string;
   }
   async uploadFile(file: Express.Multer.File, prefix: string) {
     const fileName = `${prefix}/${uuid()}`;
